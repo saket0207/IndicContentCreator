@@ -14,14 +14,16 @@ app = FastAPI()
 
 
 @app.get("/voice")
-async def get_voice():
+async def get_voice_model():
     audio = generate_audio()
     url = "https://api.elevenlabs.io/v1/voices/add"
-    headers = {"x-api-key": "55ce16928997e63887ab6a150c7cbe39"}
+    headers = {"xi-api-key": "55ce16928997e63887ab6a150c7cbe39"}
+    print(audio)
     payload = {
-        "files": [audio],
-        "name": "Rachel D"
+        "files": audio,
+        "name": "Saket Kumar"
     }
     response = requests.request("POST", url, data=payload, headers=headers)
     print("Response text from eleven labs voice api - " + response.text)
     return {"voice": response.text}
+    # return {"audio": audio}
